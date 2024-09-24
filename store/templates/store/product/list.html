@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}
+  {% if category %}{{ category.name }}{% else %}สินค้า{% endif %}
+{% endblock %}
+{% block content %}
+  <h1>{% if category %}{{ category.name }}{% else %}สินค้า{% endif %}</h1>
+  <div class="categories">
+    <h2>หมวดหมู่</h2>
+    <ul>
+      <li {% if not category %}class="selected"{% endif %}>
+        <a href="{% url "store:product_list" %}">ทั้งหมด</a>
+      </li>
+      {% for c in categories %}
+        <li {% if category.slug == c.slug %}class="selected"{% endif %}>
+          <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="products">
+    <form method="get" action="{% url 'store:product_search' %}">
+      <input type="text" name="q" placeholder="ค้นหาสินค้า">
+      <input type="submit" value="ค้นหา">
+    </form>
+    {% for product in products %}
+      <div class="product-item">
+        <a href="{{ product.get_absolute_url }}">
+          <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+        </a>
+        <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+        <br>
+        ฿{{ product.price }}
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

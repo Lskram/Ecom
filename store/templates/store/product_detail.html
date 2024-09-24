@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>รายการสินค้า</title>
+</head>
+<body>
+    <h1>รายการสินค้า</h1>
+    <ul>
+    {% for product in products %}
+        <li>
+            <a href="{% url 'product_detail' product.id %}">
+                {{ product.name }} - ฿{{ product.price }}
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}ตะกร้าสินค้า{% endblock %}
+
+{% block content %}
+    <h1>ตะกร้าสินค้า</h1>
+    {% if items %}
+        <ul>
+        {% for item in items %}
+            <li>
+                {{ item.product.name }} - จำนวน: {{ item.quantity }} - ราคา: ฿{{ item.product.price|mul:item.quantity }}
+            </li>
+        {% endfor %}
+        </ul>
+        <p>ราคารวม: ฿{{ total }}</p>
+        <a href="{% url 'store:order_create' %}" class="button">ดำเนินการสั่งซื้อ</a>
+    {% else %}
+        <p>ตะกร้าสินค้าของคุณว่างเปล่า</p>
+    {% endif %}
+    <a href="{% url 'store:product_list' %}">กลับไปหน้ารายการสินค้า</a>
+{% endblock %}

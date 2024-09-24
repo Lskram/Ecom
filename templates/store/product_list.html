@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>รายการสินค้า</title>
+</head>
+<body>
+    <h1>รายการสินค้า</h1>
+    <ul>
+    {% for product in products %}
+        <li>
+            {{ product.name }} - ฿{{ product.price }}
+            <p>{{ product.description }}</p>
+        </li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
